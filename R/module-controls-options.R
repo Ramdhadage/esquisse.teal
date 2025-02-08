@@ -77,9 +77,8 @@ controls_options_server <- function(id,
     function(input, output, session) {
 
       ns <- session$ns
-
       observeEvent(width(), {
-        # print(width())
+
         updateNumericInputIcon(
           session = session,
           inputId = "width",
@@ -88,7 +87,7 @@ controls_options_server <- function(id,
       })
 
       observeEvent(height(), {
-        # print(height())
+        print(height())
         updateNumericInputIcon(
           session = session,
           inputId = "height",
@@ -119,8 +118,8 @@ controls_options_server <- function(id,
 
       return(list(
         facet = facet_r,
-        width = debounce(reactive(input$width), 800),
-        height = debounce(reactive(input$height), 800),
+        width = reactive(input$width),
+        height = reactive(input$height),
         plotly = reactive(input$plotly)
       ))
 

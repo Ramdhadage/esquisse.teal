@@ -3,7 +3,9 @@
 
 library(shiny)
 library(esquisse)
-
+library(reactlog)
+devtools::load_all()
+reactlog_enable()
 ui <- fluidPage(
 
   theme = bs_theme_esquisse(),
@@ -28,8 +30,8 @@ ui <- fluidPage(
   ),
   esquisse_ui(
     id = "esquisse",
-    header = FALSE, # dont display gadget title
-    container = esquisse_container(height = "700px")
+    header = FALSE # dont display gadget title
+    # container = esquisse_container(height = "700px")
   )
 )
 

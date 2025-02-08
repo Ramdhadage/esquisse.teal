@@ -37,11 +37,10 @@ esquisse_server <- function(id,
   moduleServer(
     id = id,
     module = function(input, output, session) {
-
+browser()
       ns <- session$ns
       ggplotCall <- reactiveValues(code = "")
       data_chart <- reactiveValues(data = NULL, name = NULL)
-
       # Settings modal (aesthetics choices)
       observeEvent(input$settings, {
         showModal(modal_settings(aesthetics = input$aesthetics))
@@ -129,7 +128,6 @@ esquisse_server <- function(id,
 
 
       ### Geom & aesthetics selection
-
       res_geom_aes_r <- select_geom_aes_server(
         id = "geomaes",
         data_r = reactive(data_chart$data),
@@ -149,7 +147,6 @@ esquisse_server <- function(id,
         geoms <- others[grepl("geom", names(others))]
         unlist(geoms, use.names = FALSE)
       })
-
 
 
       ### Module chart controls : title, xlabs, colors, export...
@@ -181,6 +178,7 @@ esquisse_server <- function(id,
       rv_render_ggplot <- render_ggplot(
         id = "plooooooot",
         {
+          browser()
           req(input$play_plot, cancelOutput = TRUE)
           req(data_chart$data)
           data <- req(controls_rv$data)
@@ -188,6 +186,7 @@ esquisse_server <- function(id,
           geom <- req(geom_r())
 
           aes_input <- make_aes(aes_r())
+          req(length(unlist(aes_input))> 0)
           req(unlist(aes_input) %in% names(data_chart$data))
           mapping <- build_aes(
             data = data_chart$data,
@@ -282,7 +281,6 @@ esquisse_server <- function(id,
 
           ggplotCall$code <- deparse2(gg_call)
           ggplotCall$call <- gg_call
-
           ggplotCall$ggobj <- safe_ggplot(
             expr = expr((!!gg_call) %+% !!sym("esquisse_data")),
             data = setNames(list(data, data), c("esquisse_data", data_chart$name)),
@@ -309,7 +307,6 @@ esquisse_server <- function(id,
         output_module$code_filters <- controls_rv$code
         output_module$data <- controls_rv$data
       }, ignoreInit = TRUE)
-
       return(output_module)
     }
   )

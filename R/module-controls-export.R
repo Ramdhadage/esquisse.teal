@@ -60,7 +60,6 @@ controls_export_server <- function(id,
   moduleServer(
     id = id,
     function(input, output, session) {
-
       rv <- reactiveValues(plot = NULL)
 
       output$export_png <- download_plot_r(

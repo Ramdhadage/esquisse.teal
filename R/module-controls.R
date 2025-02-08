@@ -54,6 +54,7 @@ accordion_panel_ <- function(..., label, icon) {
 #' @importFrom shiny checkboxInput
 #' @importFrom datamods filter_data_ui
 #' @importFrom bslib accordion
+#' @export
 controls_ui <- function(id,
                         controls = c("options", "labs", "axes", "geoms", "theme", "filters", "code"),
                         insert_code = FALSE,
@@ -278,7 +279,6 @@ controls_server <- function(id,
     id = id,
     module = function(input, output, session) {
       ns <- session$ns
-
       options_r <- controls_options_server(
         id = "options",
         use_facet = reactive({
@@ -332,6 +332,7 @@ controls_server <- function(id,
         })
       )
 
+
       controls_export_server(
         id = "export",
         plot_r = reactive(ggplot_rv$ggobj),
@@ -339,12 +340,12 @@ controls_server <- function(id,
         height = height
       )
 
-      controls_code_server(
-        id = "code",
-        ggplot_rv = ggplot_rv,
-        output_filter = output_filter,
-        data_name = data_name
-      )
+      # controls_code_server(
+      #   id = "code",
+      #   ggplot_rv = ggplot_rv,
+      #   output_filter = output_filter,
+      #   data_name = data_name
+      # )
 
 
 

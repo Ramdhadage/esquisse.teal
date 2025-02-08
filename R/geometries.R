@@ -234,7 +234,6 @@ match_geom_args <- function(geom,
       geom_args <- c(geom_args, stat_args)
     }
   }
-  # browser()
   if (isTRUE(add_aes)) {
     GeomFun <- paste0("Geom", capitalize(gsub("geom_", "", geom)))
     GeomFun <- try(get(GeomFun, envir = pkg_envir), silent = TRUE)
@@ -253,7 +252,6 @@ match_geom_args <- function(geom,
       geom_args <- c(geom_args, setNames(aes_args, aes_args))
     }
   }
-  # browser()
   args <- args[names(args) %in% setdiff(names(geom_args), exclude_args)]
   if (isTRUE(add_mapping) & length(mapping) > 0)
     args <- c(list(expr(aes(!!!syms2(mapping)))), args)

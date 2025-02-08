@@ -52,87 +52,87 @@ esquisse_ui <- function(id,
                         downloads = downloads_labels(),
                         n_geoms = 8) {
   ns <- NS(id)
-  header_btns <- esquisse_header()
-  if (is_list(header)) {
-    header_btns <- modifyList(header_btns, header)
-    header <- TRUE
-  }
-  if (isFALSE(header)) {
-    header_btns <- list()
-  }
-  header_btns <- make_btn_header(header_btns)
-  tag_header <- tags$div(
-    class = "esquisse-title-container bg-primary d-flex justify-content-between",
-    tags$div(
-      class = "esquisse-header-btns-left",
-      header_btns$.before,
-      header_btns$import_data(ns("launch_import_data")),
-      header_btns$show_data(ns("show_data")),
-      header_btns$update_variable(ns("update_variable")),
-      header_btns$create_column(ns("create_col")),
-      header_btns$cut_variable(ns("cut_var")),
-      header_btns$update_factor(ns("up_fct"))
-    ),
-    tags$h1("Esquisse", class = "esquisse-title"),
-    tags$div(
-      class = "esquisse-header-btns-right",
-      header_btns$settings(ns("settings")),
-      header_btns$.after,
-      header_btns$close(ns("close")),
-    ),
-  )
+  # header_btns <- esquisse_header()
+  # if (is_list(header)) {
+  #   header_btns <- modifyList(header_btns, header)
+  #   header <- TRUE
+  # }
+  # if (isFALSE(header)) {
+  #   header_btns <- list()
+  # }
+  # header_btns <- make_btn_header(header_btns)
+  # tag_header <- tags$div(
+  #   class = "esquisse-title-container bg-primary d-flex justify-content-between",
+  #   tags$div(
+  #     class = "esquisse-header-btns-left",
+  #     header_btns$.before,
+  #     header_btns$import_data(ns("launch_import_data")),
+  #     header_btns$show_data(ns("show_data")),
+  #     header_btns$update_variable(ns("update_variable")),
+  #     header_btns$create_column(ns("create_col")),
+  #     header_btns$cut_variable(ns("cut_var")),
+  #     header_btns$update_factor(ns("up_fct"))
+  #   ),
+  #   tags$h1("Esquisse", class = "esquisse-title"),
+  #   tags$div(
+  #     class = "esquisse-header-btns-right",
+  #     header_btns$settings(ns("settings")),
+  #     header_btns$.after,
+  #     header_btns$close(ns("close")),
+  #   ),
+  # )
 
   ui <- tags$div(
-    class = "esquisse-container",
-    html_dependency_esquisse(),
-    html_dependency_clipboard(),
+    # class = "esquisse-container",
+    # html_dependency_esquisse(),
+    # html_dependency_clipboard(),
 
-    if (isTRUE(header)) tag_header,
+    # if (isTRUE(header)) tag_header,
 
-    if (!isTRUE(layout_sidebar)) {
-      tagList(
-        select_geom_aes_ui(
-          id = ns("geomaes"),
-          n_geoms = n_geoms,
-          list_geoms = c(
-            list(geomIcons()),
-            rep_len(list(
-              geomIcons(
-                c("line", "step", "jitter", "point", "smooth", "density", "boxplot", "violin", "text", "label"),
-                default = "select"
-              )
-            ), n_geoms)
-          )
-        ),
-        fillCol(
-          style = "overflow-y: auto;",
-          tags$div(
-            class = "ggplot-output-container",
-            play_pause_input(ns("play_plot"), show = play_pause),
-            ggplot_output(
-              id = ns("plooooooot"),
-              width = "100%",
-              height = "100%",
-              downloads = if ("export" %in% controls) NULL else downloads
-            )
-          )
-        ),
-        controls_ui(
-          id = ns("controls"),
-          insert_code = insert_code,
-          controls = controls,
-          downloads = downloads,
-          n_geoms = n_geoms
-        )
-      )
-    } else {
+    # if (!isTRUE(layout_sidebar)) {
+    #   tagList(
+    #     select_geom_aes_ui(
+    #       id = ns("geomaes"),
+    #       n_geoms = n_geoms,
+    #       list_geoms = c(
+    #         list(geomIcons()),
+    #         rep_len(list(
+    #           geomIcons(
+    #             c("line", "step", "jitter", "point", "smooth", "density", "boxplot", "violin", "text", "label"),
+    #             default = "select"
+    #           )
+    #         ), n_geoms)
+    #       )
+    #     ),
+    #     fillCol(
+    #       style = "overflow-y: auto;",
+    #       tags$div(
+    #         class = "ggplot-output-container",
+    #         play_pause_input(ns("play_plot"), show = play_pause),
+    #         ggplot_output(
+    #           id = ns("plooooooot"),
+    #           width = "100%",
+    #           height = "100%",
+    #           downloads = if ("export" %in% controls) NULL else downloads
+    #         )
+    #       )
+    #     ),
+    #     controls_ui(
+    #       id = ns("controls"),
+    #       insert_code = insert_code,
+    #       controls = controls,
+    #       downloads = downloads,
+    #       n_geoms = n_geoms
+    #     )
+    #   )
+    # } else {
       bslib::layout_sidebar(
         padding = 0,
         fillable = FALSE,
         fill = FALSE,
         height = "100%",
         sidebar = bslib::sidebar(
-          position = "right",
+          position = "left",
           # open = "always",
           title = "CONTROLS",
           width = 400,
@@ -145,7 +145,6 @@ esquisse_ui <- function(id,
             n_geoms = n_geoms
           )
         ),
-
         tags$div(
           class = "ggplot-geom-aes-container",
           select_geom_aes_ui(
@@ -173,12 +172,12 @@ esquisse_ui <- function(id,
           )
         )
       )
-    }
+    # }
   )
 
-  if (is.function(container)) {
-    ui <- container(ui)
-  }
+  # if (is.function(container)) {
+  #   ui <- container(ui)
+  # }
   return(ui)
 }
 

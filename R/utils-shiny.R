@@ -174,3 +174,18 @@ resize <- function(id,
     )
   )
 }
+# control_ui_fun <- function(id = ns("controls"),
+#                            insert_code = FALSE,
+#                            controls = controls,
+#                            downloads = downloads,
+#                            n_geoms = n_geoms
+#                            ){
+#   controls_ui(
+#     id = id,
+#     insert_code = insert_code,
+#     controls = controls,
+#     layout = "accordion",
+#     downloads = downloads,
+#     n_geoms = n_geoms
+#   )
+# }
