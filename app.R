@@ -12,13 +12,48 @@ devtools::load_all()
 #     !inherits(y, "ts")
 #   })] %>% as.name()
 
-data <- teal.data::teal_data() %>% within({
+initial_data <- teal.data::teal_data() %>% within({
   # iris <- iris
   cars <-  cars
 })
 reactlog_enable()
 app <- teal::init(
-  data = data,
+  data = teal_data_module(
+    ui = function(id) {
+      ns <- NS(id)
+      fluidPage(
+        mainPanel(
+          shiny::fileInput(ns("file"), "Upload a file"),
+          actionButton(ns("submit"), "Submit"),
+          DT::dataTableOutput(ns("preview"))
+        )
+      )
+    },
+    server = function(id) {
+      moduleServer(id, function(input, output, session) {
+
+        data <- eventReactive(input$submit, {
+          if (!is.null(input$file)) {
+            td <- within(initial_data, my_data <- read.csv(path), path = input$file$datapath)
+            # datanames(td) <- c("cars", "my_data")
+            td
+          } else {
+            initial_data
+          }
+        })
+
+        output$preview <- DT::renderDataTable({
+          req(input$submit)
+          if (!is.null(input$file)) {
+            data()[["my_data"]]
+          } else {
+            data()[["cars"]]
+          }
+        })
+        data
+      })
+    }
+  ),
   modules = example_esquisse_module()
 )
 
