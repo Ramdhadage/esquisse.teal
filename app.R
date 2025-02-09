@@ -13,15 +13,12 @@ devtools::load_all()
 #   })] %>% as.name()
 
 data <- teal.data::teal_data() %>% within({
-  iris <- iris
-  # cars = cars
+  # iris <- iris
+  cars <-  cars
 })
-# reactlog_enable()
+reactlog_enable()
 app <- teal::init(
-  data = teal.data::teal_data() %>% within({
-    iris <- iris
-    # cars = cars
-  }),
+  data = data,
   modules = example_esquisse_module()
 )
 

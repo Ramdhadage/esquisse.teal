@@ -108,9 +108,9 @@ controls_ui <- function(id,
       inputId = ns("controls-options"),
       class = "esquisse-controls-options",
       style = "default",
-      label = i18n("Options"),
+      label ="",
       up = TRUE,
-      icon = ph("gear"),
+      icon = "",
       status = "default btn-esquisse-controls btn-outline-primary text-nowrap"
     )
   }
@@ -120,9 +120,9 @@ controls_ui <- function(id,
       inputId = ns("controls-labs"),
       class = "esquisse-controls-labs",
       style = "default",
-      label = i18n("Labels & Title"),
+      label = "",
       up = TRUE,
-      icon = ph("text-aa"),
+      icon = "",
       status = "default btn-esquisse-controls btn-outline-primary text-nowrap"
     )
   }
@@ -132,9 +132,9 @@ controls_ui <- function(id,
       inputId = ns("controls-axes"),
       class = "esquisse-controls-axes",
       style = "default",
-      label = i18n("Axes"),
+      label = "",
       up = TRUE,
-      icon = ph("vector-two"),
+      icon = "",
       status = "default btn-esquisse-controls btn-outline-primary text-nowrap"
     )
   }
@@ -155,9 +155,9 @@ controls_ui <- function(id,
       inputId = ns("controls-geoms"),
       class = "esquisse-controls-geoms",
       style = "default",
-      label = i18n("Geometries"),
+      label = "",
       up = TRUE,
-      icon = ph("wrench"),
+      icon = "",
       status = "default btn-esquisse-controls btn-outline-primary text-nowrap"
     )
   }
@@ -177,9 +177,9 @@ controls_ui <- function(id,
       inputId = ns("controls-theme"),
       class = "esquisse-controls-theme",
       style = "default",
-      label = i18n("Theme"),
+      label = "",
       up = TRUE,
-      icon = ph("paint-roller"),
+      icon = "",
       status = "default btn-esquisse-controls btn-outline-primary text-nowrap"
     )
   }

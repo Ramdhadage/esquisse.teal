@@ -37,7 +37,6 @@ esquisse_server <- function(id,
   moduleServer(
     id = id,
     module = function(input, output, session) {
-browser()
       ns <- session$ns
       ggplotCall <- reactiveValues(code = "")
       data_chart <- reactiveValues(data = NULL, name = NULL)
@@ -178,8 +177,7 @@ browser()
       rv_render_ggplot <- render_ggplot(
         id = "plooooooot",
         {
-          browser()
-          req(input$play_plot, cancelOutput = TRUE)
+          # req(input$play_plot, cancelOutput = TRUE)
           req(data_chart$data)
           data <- req(controls_rv$data)
           req(controls_rv$inputs)
