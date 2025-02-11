@@ -34,8 +34,10 @@ app <- teal::init(
 
         data <- eventReactive(input$submit, {
           if (!is.null(input$file)) {
-            td <- within(initial_data, my_data <- read.csv(path), path = input$file$datapath)
-            # datanames(td) <- c("cars", "my_data")
+            td <- within(initial_data,
+                         filename <- read.csv(path),
+                         path = input$file$datapath,
+                         filename = tools::file_path_sans_ext(input$file$name))
             td
           } else {
             initial_data
