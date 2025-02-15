@@ -33,7 +33,7 @@ select_aes_server <- function(id,
         }
         data <- isolate(data_r())
         if (!is.null(data)) {
-          var_choices <- get_col_names(data)
+          var_choices <- sort(get_col_names(data))
           choiceValues <- var_choices
           choiceNames <- badgeType(
             col_name = var_choices,
@@ -105,7 +105,7 @@ select_aes_server <- function(id,
             badge = FALSE
           )
         } else {
-          var_choices <- get_col_names(data)
+          var_choices <- sort(get_col_names(data))
           var_badges <- badgeType(
             col_name = var_choices,
             col_type = col_type(data[, var_choices, drop = TRUE])
