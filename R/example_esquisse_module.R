@@ -12,7 +12,7 @@
 #'   shinyApp(app$ui, app$server)
 #' }
 #' @export
-example_esquisse_module <- function(label = "example teal module", datanames = "all", transformers = list()) {
+example_esquisse_module <- function(label = "example teal module", names = "all", transformers = list()) {
   checkmate::assert_string(label)
   module(
     label,
@@ -41,7 +41,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
             id = "esquisse",
             data_rv = reactive(data()[[input$dataname]]),
             import_from = NULL,
-            n_geoms = 1
+            n_geoms = 2
           )
         })
       })
@@ -53,7 +53,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
           class = "ggplot-geom-aes-container",
           select_geom_aes_ui(
             id = ns("esquisse-geomaes"),
-            n_geoms = 1,
+            n_geoms = 2,
             list_geoms = c(
               list(geomIcons()),
               rep_len(list(
@@ -93,7 +93,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
                 controls = c("geoms"),
                 layout = "accordion",
                 downloads = downloads_labels(),
-                n_geoms = 1
+                n_geoms = 2
               )
             ),
             teal.widgets::panel_item(
@@ -105,7 +105,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
                 controls = c("options"),
                 layout = "accordion",
                 downloads = downloads_labels(),
-                n_geoms = 1
+                n_geoms = 2
               )
             ),
             teal.widgets::panel_item(
@@ -117,7 +117,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
                 controls = c("labs"),
                 layout = "accordion",
                 downloads = downloads_labels(),
-                n_geoms = 1
+                n_geoms = 2
               )
             ),
             teal.widgets::panel_item(
@@ -129,7 +129,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
                 controls = c("axes"),
                 layout = "accordion",
                 downloads = downloads_labels(),
-                n_geoms = 1
+                n_geoms = 2
               )
             ),
             teal.widgets::panel_item(
@@ -141,7 +141,7 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
                 controls = c("theme"),
                 layout = "accordion",
                 downloads = downloads_labels(),
-                n_geoms = 1
+                n_geoms = 2
               )
             )
           ),
@@ -149,6 +149,6 @@ example_esquisse_module <- function(label = "example teal module", datanames = "
         )
       )
   },
-  datanames = datanames
+  datanames = names
   )
 }
