@@ -181,7 +181,7 @@ controls_geoms_ui <- function(id, style = NULL) {
         label = i18n("Stat summary function:"),
         inline = TRUE,
         status = "primary",
-        choices = c("sum", "mean", "min", "max"),
+        choices = c("min", "mean", "median", "max", "sum"),
         outline = TRUE
       ),
       radioGroupButtons(
