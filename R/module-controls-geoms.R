@@ -183,6 +183,20 @@ controls_geoms_ui <- function(id, style = NULL) {
         status = "primary",
         choices = c("sum", "mean", "min", "max"),
         outline = TRUE
+      ),
+      radioGroupButtons(
+        inputId = ns("sort_order"),
+        label = i18n("Sort X Axis by Y Axis Values:"),
+        choiceNames = list(
+          ph("arrow-down", title = i18n("bottom"))
+          # ph("arrow-up", title = i18n("top"))
+        ),
+        choiceValues = c("bottom"
+                         # , "top"
+                         ),
+        selected = "bottom",
+        justified = TRUE,
+        size = "sm"
       )
     ),
     tags$div(
@@ -250,10 +264,10 @@ controls_geoms_server <- function(id,
       inputs_r <- reactive({
         geom <- geoms_r()
         aesthetics <- names(aesthetics_r())
-
         dropNulls(list(
           stat = if (identical(geom, "bar") & isTRUE("yvar" %in% aesthetics)) "summary",
           fun = if (identical(geom, "bar") & isTRUE("yvar" %in% aesthetics)) input$stat_fun,
+          sort_order = if (identical(geom, "bar") & isTRUE("yvar" %in% aesthetics)) input$sort_order,
           adjust = input$adjust,
           position = if (
             !identical(input$position, "stack") &
@@ -288,7 +302,6 @@ controls_geoms_server <- function(id,
         return(variable)
       }))
       colors_r_d <- debounce(colors_r, millis = 1000)
-
       return(reactive(list(inputs = inputs_r(), colors = colors_r_d())))
     }
   )
