@@ -61,8 +61,8 @@ ggcall <- function(data = NULL,
   if (length(mapping) > 0) {
     #
     mapping_list <- syms2(mapping)
-    if(!is.null(mapping_list$y) & geom %in% "bar"){
-      mapping_list$x <- expr(reorder(!!mapping_list$x, !!mapping_list$y, decreasing = TRUE))
+    if(!is.null(mapping_list$y) & geom %in% "bar" & !is.null(geom_args$fun)){
+      mapping_list$x <- expr(reorder(!!mapping_list$x, !!mapping_list$y, FUN = !!geom_args$fun, decreasing = TRUE))
     }
     aes <- expr(aes(!!!mapping_list))
     ggcall <- expr(ggplot(!!data) + !!aes)
