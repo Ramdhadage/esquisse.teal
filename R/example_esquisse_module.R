@@ -25,12 +25,12 @@ example_esquisse_module <- function(label = "example teal module", names = "all"
           if (identical(selected, "")) {
             selected <- restoreInput(session$ns("dataname"), NULL)
           } else if (isFALSE(selected %in% datanames_rv())) {
-            selected <- datanames_rv()[1]
+            selected <- sort(datanames_rv()[1])
           }
           updateSelectInput(
             session = session,
             inputId = "dataname",
-            choices = datanames_rv(),
+            choices = sort(datanames_rv()),
             selected = selected
           )
         })
